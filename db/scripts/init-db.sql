@@ -20,8 +20,8 @@ CREATE TABLE employees (
 CREATE TABLE events (
     eventID serial NOT NULL,
     employeeID serial NOT NULL,
-    datestart timestamp NOT NULL,
-    dateend timestamp NOT NULL,
+    datestart date NOT NULL,
+    dateend date NOT NULL,
     reason VARCHAR(250) NULL,
 
     PRIMARY KEY (eventID),
@@ -29,7 +29,7 @@ CREATE TABLE events (
 );
 
 INSERT INTO departments
-VALUES (default, 'data');
+VALUES (default, 'data2');
 
 insert into employees
 values (default, 'simon', 'bui', 'simonbui', 'simonbui', 1);
