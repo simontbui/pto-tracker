@@ -1,24 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnet_backend.Entities
 {
     [Table("events")]
     public class Event
     {
-        [Column("eventid")]
-        public int EventId { get; set; }
+        [Key]
+        public int event_id { get; set; }
+        public DateOnly date_start { get; set; }
+        public DateOnly date_end { get; set; }
+        public string reason { get; set; } = string.Empty;
 
-        [Column("datestart")]
-        public DateOnly DateStart { get; set; }
-
-        [Column("dateend")]
-        public DateOnly DateEnd { get; set; }
-
-        [Column("reason")]
-        public string Reason { get; set; } = string.Empty;
-
-        [Column("employeeid")]
         [ForeignKey("employees")]
-        public int EmployeeId { get; set; }
+        public int employee_id { get; set; }
     }
 }
