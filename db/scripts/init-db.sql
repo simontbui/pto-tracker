@@ -1,35 +1,35 @@
 CREATE TABLE departments (
-    departmentID serial NOT NULL,
-    departmentname VARCHAR(15) NOT NULL,
+    department_id serial NOT NULL,
+    department_name VARCHAR(15) NOT NULL,
 
-    PRIMARY KEY (departmentID)
+    PRIMARY KEY (department_id)
 );
 
 CREATE TABLE employees (
-    employeeID serial,
-    firstname VARCHAR(15) NOT NULL,
-    lastname VARCHAR(15) NOT NULL,
+    employee_id serial,
+    first_name VARCHAR(15) NOT NULL,
+    last_name VARCHAR(15) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(50) NOT NULL,
-    departmentID serial,
+    department_id serial,
 
-    PRIMARY KEY (employeeID),
-    FOREIGN KEY(departmentID) REFERENCES departments(departmentID) ON DELETE CASCADE ON UPDATE CASCADE
+    PRIMARY KEY (employee_id),
+    FOREIGN KEY(department_id) REFERENCES departments(department_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE events (
-    eventID serial NOT NULL,
-    employeeID serial NOT NULL,
-    datestart date NOT NULL,
-    dateend date NOT NULL,
+    event_id serial NOT NULL,
+    employee_id serial NOT NULL,
+    date_start date NOT NULL,
+    date_end date NOT NULL,
     reason VARCHAR(250) NULL,
 
-    PRIMARY KEY (eventID),
-    FOREIGN KEY (employeeID) REFERENCES employees(employeeID) ON DELETE CASCADE ON UPDATE CASCADE
+    PRIMARY KEY (event_id),
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO departments
-VALUES (default, 'data2');
+VALUES (default, 'data');
 
 insert into employees
 values (default, 'simon', 'bui', 'simonbui', 'simonbui', 1);
