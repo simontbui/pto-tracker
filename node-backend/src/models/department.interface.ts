@@ -1,5 +1,4 @@
-import { IBase } from "./base.interface";
-
-export interface IDepartment extends IBase {
+export interface IDepartment {
+    department_id: number;
     department_name: string;
 }
