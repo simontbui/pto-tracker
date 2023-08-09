@@ -2,8 +2,9 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { Events } from "../api/events";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, List, ListItem, ListItemText, Modal, Typography } from "@mui/material";
+import { EventDetails } from "../api/view_event_details";
+import { IEventDetails } from "../api/models/event-details.interface";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,28 +19,32 @@ const style = {
 };
 
 export default function CalendarUI() {
-  const [events, setEvents] = useState([]);
+  const [eventDetails, setEventsDetails] = useState<IEventDetails[]>([]);
+  const [currEventDetails, setCurrEventDetails] = useState<IEventDetails[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   
-
   const localizer = momentLocalizer(moment);
 
   useEffect(() => {
-    Events.getAllEvents("events")
+    EventDetails.getAllEvents()
       .then(res => {
-        let data:any = []
+        let data: any[] = []
         res.forEach((row: any) => data.push({
-            title: row.reason,
-            start: moment(row.date_start, "YYYY-MM-DD"),
-            end: moment(row.date_end, "YYYY-MM-DD").add(1, "d")
+            event_id: row.event_id,
+            first_name: row.first_name.charAt(0).toUpperCase() + row.first_name.slice(1),
+            last_name: row.last_name.charAt(0).toUpperCase() + row.last_name.slice(1),
+            title: row.reason.charAt(0).toUpperCase() + row.reason.slice(1),
+            date_start: moment(row.date_start, "YYYY-MM-DD"),
+            date_end: moment(row.date_end, "YYYY-MM-DD").add(1, "d")
         }))
-        setEvents(data);
+        setEventsDetails(data);
       })
       .catch(err => console.log(err))
   },[])
 
   function handleOpenModal(e: any) {
     console.log(e);
+    setCurrEventDetails(e);
     setModalOpen(true);
   }
 
@@ -55,9 +60,9 @@ export default function CalendarUI() {
         style={{ height: 500, width: 800, margin: "75px" }}
         views={["month"]}
         toolbar={true}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
+        events={eventDetails}
+        startAccessor="date_start"
+        endAccessor="date_end"
         onShowMore={(e) => handleOpenModal(e)}
         onSelectEvent={(e) => handleOpenModal(e)}
       />
@@ -70,9 +75,17 @@ export default function CalendarUI() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Temporary placeholder text for PTO modal title.
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Temporary placeholder text.
-          </Typography>
+          <List>
+            {currEventDetails.map((event) =>
+              <ListItem>
+                <ListItemText primary={
+                  event.first_name + " " + event.last_name + " " + event.title + " " + 
+                  event.date_start.format("M/D/YYYY").split("T")[0] + " - " +
+                  event.date_end.format("M/D/YYYY").split('T')[0]
+              } />
+              </ListItem>
+            )}
+          </List>
         </Box>
       </Modal>
     </div>
