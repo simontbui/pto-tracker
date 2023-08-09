@@ -47,6 +47,7 @@ export default function CalendarUI() {
     setModalOpen(false);
   }
 
+  // firstname | lastname | startdate | enddate | reason
   return (
     <div className="rbc-calendar">
       <Calendar 
