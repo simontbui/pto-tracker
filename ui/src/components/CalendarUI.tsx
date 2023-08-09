@@ -42,12 +42,18 @@ export default function CalendarUI() {
       .catch(err => console.log(err))
   },[])
 
-  function handleOpenModal(e: any) {
+  function handleShowMore(e: any) {
     console.log(e);
     setCurrEventDetails(e);
     setModalOpen(true);
   }
 
+  function handleShowEvent(e: any) {
+    console.log(e);
+    setCurrEventDetails([e]);
+    setModalOpen(true);
+
+  }
   function handleCloseModal() {
     setModalOpen(false);
   }
@@ -63,8 +69,8 @@ export default function CalendarUI() {
         events={eventDetails}
         startAccessor="date_start"
         endAccessor="date_end"
-        onShowMore={(e) => handleOpenModal(e)}
-        onSelectEvent={(e) => handleOpenModal(e)}
+        onShowMore={(e) => handleShowMore(e)}
+        onSelectEvent={(e) => handleShowEvent(e)}
       />
 
       <Modal 
@@ -73,10 +79,10 @@ export default function CalendarUI() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Temporary placeholder text for PTO modal title.
+            Time Off
           </Typography>
           <List>
-            {currEventDetails.map((event) =>
+            {currEventDetails?.map((event) =>
               <ListItem>
                 <ListItemText primary={
                   event.first_name + " " + event.last_name + " " + event.title + " " + 
