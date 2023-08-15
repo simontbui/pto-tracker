@@ -1,5 +1,16 @@
 from django.db import models
 
+class View_Event_Details(models.Model):
+    event_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=15)
+    last_name = models.CharField(max_length=15)
+    reason = models.CharField(max_length=250)
+    date_start = models.DateField()
+    date_end = models.DateField()
+
+    class Meta:
+        db_table = "view_event_details"
+    
 class Departments(models.Model):
     department_id = models.AutoField(primary_key=True)
     department_name = models.CharField(max_length=15)

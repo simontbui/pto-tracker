@@ -3,7 +3,7 @@ import { pool } from "../db-pool/pool";
 import { IEventDetails } from "../models/event-details.interface";
 
 export const getEventDetails = (req: Request, res: Response) => {
-    pool.query("SELECT * FROM view_event_details", (error, results) => {
+    pool.query("SELECT * FROM view_event_details ORDER BY first_name, last_name", (error, results) => {
         if (error) {
             throw error;
         }
