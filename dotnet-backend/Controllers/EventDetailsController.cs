@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_backend.Controllers
 {
-    public class EventsController : BaseApiController
+    public class EventDetailsController : BaseApiController
     {
         private readonly PtoContext _context;
-        public EventsController(PtoContext context)
+        public EventDetailsController(PtoContext context)
         {
             _context = context;
         }

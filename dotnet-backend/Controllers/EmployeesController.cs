@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_backend.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class EmployeesController : Controller
+    public class EmployeesController : BaseApiController
     {
         private readonly PtoContext _context;
 
