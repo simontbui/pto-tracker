@@ -6,7 +6,7 @@ import { Box, List, ListItem, ListItemText, Modal, Typography } from "@mui/mater
 import { EventDetails } from "../api/view_event_details";
 import { IEventDetails } from "../api/models/event-details.interface";
 
-const style = {
+const modalStyle = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
@@ -58,7 +58,6 @@ export default function CalendarUI() {
     setModalOpen(false);
   }
 
-  // firstname | lastname | startdate | enddate | reason
   return (
     <div className="rbc-calendar">
       <Calendar 
@@ -77,7 +76,7 @@ export default function CalendarUI() {
         open={modalOpen}
         onClose={handleCloseModal}
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Time Off
           </Typography>
@@ -87,8 +86,8 @@ export default function CalendarUI() {
                 <ListItemText primary={
                   event.first_name + " " + event.last_name + " " + event.title + " " + 
                   event.date_start.format("M/D/YYYY").split("T")[0] + " - " +
-                  event.date_end.format("M/D/YYYY").split('T')[0]
-              } />
+                  event.date_end.format("M/D/YYYY").split('T')[0]} 
+                />
               </ListItem>
             )}
           </List>
