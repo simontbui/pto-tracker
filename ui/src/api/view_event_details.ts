@@ -7,5 +7,5 @@ const responseBody = (response: AxiosResponse) => response.data;
 //insert axios.interceptors.response.use here for error handling later
 
 export const EventDetails = {
-    getAllEvents: (url: string = "event-details") => axios.get(url).then(responseBody)
+    getAllEvents: (url: string = "event-details/") => axios.get(url).then(responseBody)
 }
