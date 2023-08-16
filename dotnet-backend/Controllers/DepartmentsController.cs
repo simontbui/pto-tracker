@@ -8,9 +8,8 @@ namespace dotnet_backend.Controllers
 {
     public class DepartmentsController : BaseApiController
     {
-        private readonly PtoContext _context;
-
-        public DepartmentsController(PtoContext context)
+        private readonly PtoTrackerContext _context;
+        public DepartmentsController(PtoTrackerContext context) 
         {
             _context = context;
         }

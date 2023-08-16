@@ -28,7 +28,7 @@ export default function CalendarUI() {
   useEffect(() => {
     EventDetails.getAllEvents()
       .then(res => {
-        let data: any[] = []
+        let data: any[] = [];
         res.forEach((row: any) => data.push({
             event_id: row.event_id,
             first_name: row.first_name.charAt(0).toUpperCase() + row.first_name.slice(1),

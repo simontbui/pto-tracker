@@ -5,18 +5,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_backend.Controllers
 {
-    public class EventsController : BaseApiController
+    [Route("api/event-details")]
+    public class EventDetailsController : Controller
     {
         private readonly PtoTrackerContext _context;
-        public EventsController(PtoTrackerContext context)
+        public EventDetailsController(PtoTrackerContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> GetAllEvents()
+        public async Task<ActionResult<List<ViewEventDetail>>> GetAllEmployees()
         {
-            return await _context.Events
+            return await _context.ViewEventDetails
                 .ToListAsync();
         }
     }

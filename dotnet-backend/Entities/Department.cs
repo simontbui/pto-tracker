@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace dotnet_backend.Entities
+namespace dotnet_backend.Entities;
+
+public partial class Department
 {
-    [Table("departments")]
-    public class Department
-    {
-        [Key]
-        public int department_id { get; set; }
-        public string department_name { get; set; } = string.Empty;
-    }
+    public int department_id { get; set; }
+
+    public string department_name { get; set; } = null!;
+
+    //public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

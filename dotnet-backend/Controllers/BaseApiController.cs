@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using dotnet_backend.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_backend.Controllers
 {

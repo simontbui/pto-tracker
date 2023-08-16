@@ -32,7 +32,7 @@ CREATE VIEW view_event_details AS
 	SELECT ev.event_id, emp.first_name, emp.last_name, ev.reason, ev.date_start, ev.date_end, d.department_id
 	FROM employees emp
 	JOIN events ev ON emp.employee_id = ev.employee_id
-	JOIN departments d ON d.department_id = emp.department_id   
+	JOIN departments d ON d.department_id = emp.department_id
 
 INSERT INTO departments
 VALUES (default, 'data');

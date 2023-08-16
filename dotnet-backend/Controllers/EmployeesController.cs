@@ -7,9 +7,9 @@ namespace dotnet_backend.Controllers
 {
     public class EmployeesController : BaseApiController
     {
-        private readonly PtoContext _context;
+        private readonly PtoTrackerContext _context;
 
-        public EmployeesController(PtoContext context)
+        public EmployeesController(PtoTrackerContext context)
         {
             _context = context;
         }
