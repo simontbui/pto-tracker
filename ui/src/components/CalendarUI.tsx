@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Box, List, ListItem, ListItemText, Modal, Typography } from "@mui/material";
-import { EventDetails } from "../api/view_event_details";
+import { EventDetails } from "../api/api";
 import { IEventDetails } from "../api/models/event-details.interface";
 
 const modalStyle = {
@@ -26,7 +26,7 @@ export default function CalendarUI() {
   const localizer = momentLocalizer(moment);
 
   useEffect(() => {
-    EventDetails.getAllEvents()
+    EventDetails.getAllEvents
       .then(res => {
         let data: any[] = [];
         res.forEach((row: any) => data.push({
