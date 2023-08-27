@@ -39,7 +39,7 @@ export default function SearchFilter() {
       <form onSubmit={handleSubmit}>
         <FormControl 
           fullWidth 
-          sx={{ display: "grid", gap: 2, mr: 2 }}
+          sx={{ display: "grid", gap: 1 }}
           onSubmit={(e) => console.log(e)}
         >
           <InputLabel>Department Name</InputLabel>

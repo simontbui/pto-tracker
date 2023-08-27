@@ -62,7 +62,7 @@ export default function CalendarUI() {
     <div className="rbc-calendar">
       <Calendar 
         localizer={localizer} 
-        style={{ height: 500, width: 800, margin: "75px" }}
+        style={{ height: 510, width: 1200 }}
         views={["month"]}
         toolbar={true}
         events={eventDetails}
