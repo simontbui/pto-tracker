@@ -5,6 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Box, List, ListItem, ListItemText, Modal, Typography } from "@mui/material";
 import { EventDetails } from "../api/api";
 import { IEventDetails } from "../api/models/event-details.interface";
+import ISearchFilter from "../api/models/searchfilter.interface";
 
 const modalStyle = {
   position: 'absolute' as 'absolute',
@@ -18,7 +19,11 @@ const modalStyle = {
   p: 4,
 };
 
-export default function CalendarUI() {
+interface IProps {
+  searchFilter: ISearchFilter
+}
+
+export default function CalendarUI({searchFilter}: IProps) {
   const [eventDetails, setEventsDetails] = useState<IEventDetails[]>([]);
   const [currEventDetails, setCurrEventDetails] = useState<IEventDetails[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,6 +61,11 @@ export default function CalendarUI() {
   }
   function handleCloseModal() {
     setModalOpen(false);
+    console.log(searchFilter);
+  }
+
+  function formatDate(dateTime: moment.Moment) {
+    return dateTime.format("M/D/YYYY").split("T")[0];
   }
 
   return (
@@ -82,11 +92,11 @@ export default function CalendarUI() {
           </Typography>
           <List>
             {currEventDetails?.map((event) =>
-              <ListItem>
+              <ListItem key={event.event_id}>
                 <ListItemText primary={
                   event.first_name + " " + event.last_name + " " + event.title + " " + 
-                  event.date_start.format("M/D/YYYY").split("T")[0] + " - " +
-                  event.date_end.format("M/D/YYYY").split('T')[0]} 
+                  formatDate(event.date_start) + " - " +
+                  formatDate(event.date_end)} 
                 />
               </ListItem>
             )}
