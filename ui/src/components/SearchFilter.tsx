@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Departments } from "../api/api"
 import IDepartment from "../api/models/department.interface"
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import upperFirstChar from "../utils/StringHelpers";
 import _ from "lodash";
+import ISearchFilter from "../api/models/searchfilter.interface";
 
-export default function SearchFilter() {
+interface IProps {
+  setSearchFilter: Dispatch<SetStateAction<ISearchFilter>>
+}
+
+export default function SearchFilter({setSearchFilter}: IProps) {
   const [departments, setDepartments] = useState<IDepartment[]>([]);
 
   useEffect(() => {
@@ -27,11 +32,18 @@ export default function SearchFilter() {
   function handleSubmit(e: any) {
     e.preventDefault();
 
-    const data = new FormData(e.currentTarget);
-    console.log({
-      "departmentName": data.get("departmentName"),
-      "employeeName": data.get("employeeName")
-    });
+    const data: any = new FormData(e.currentTarget);
+    const deptName = data.get("departmentName");
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+
+    const filter: ISearchFilter = {
+      departmentName: deptName,
+      firstName: firstName,
+      lastName: lastName
+    }
+
+    setSearchFilter(filter);
   }
 
   return (
@@ -56,7 +68,8 @@ export default function SearchFilter() {
             )))}
           </Select>
 
-          <TextField label="Employee Name" variant="outlined" name="employeeName"/>
+          <TextField label="First Name" variant="outlined" name="firstName"/>
+          <TextField label="Last Name" variant="outlined" name="lastName"/>
           <Button 
             variant="contained"
             type="submit"
