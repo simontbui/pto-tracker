@@ -1,9 +1,9 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import CalendarUI from './components/CalendarUI';
 import Header from './components/Header';
 import SearchFilter from './components/SearchFilter';
 import { styled } from "@mui/material/styles";
-import AddEvent from './components/AddEvent';
+import AddEvent from './components/AddEvent/AddEvent';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -31,6 +31,8 @@ function App() {
           </Box>
         </Box>
       </Wrapper>
+
+      {/* <AddEventModal /> */}
     </div>
   );
 }
