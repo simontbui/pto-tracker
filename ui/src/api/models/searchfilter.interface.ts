@@ -1,5 +1,5 @@
 export default interface ISearchFilter {
-    departmentName: string;
-    firstName: string;
-    lastName: string;
+    departmentName?: string;
+    firstName?: string;
+    lastName?: string;
 }

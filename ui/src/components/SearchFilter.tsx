@@ -7,15 +7,15 @@ import _ from "lodash";
 import ISearchFilter from "../api/models/searchfilter.interface";
 
 interface IProps {
-  setSearchFilter: Dispatch<SetStateAction<ISearchFilter>>
+  setSearchFilter: Dispatch<SetStateAction<ISearchFilter>>;
+  searchFilter: ISearchFilter | {};
 }
 
-export default function SearchFilter({setSearchFilter}: IProps) {
+export default function SearchFilter({searchFilter, setSearchFilter}: IProps) {
   const [departments, setDepartments] = useState<IDepartment[]>([]);
 
   useEffect(() => {
     Departments.getAllDepartments
-
       .then(res => {
         let deptData: IDepartment[] = []
         res.forEach((row: IDepartment) => deptData.push({
@@ -33,17 +33,20 @@ export default function SearchFilter({setSearchFilter}: IProps) {
     e.preventDefault();
 
     const data: any = new FormData(e.currentTarget);
-    const deptName = data.get("departmentName");
-    const firstName = data.get("firstName");
-    const lastName = data.get("lastName");
+    const deptName: string = data.get("departmentName");
+    const firstName: string = data.get("firstName");
+    const lastName: string = data.get("lastName");
 
-    const filter: ISearchFilter = {
-      departmentName: deptName,
-      firstName: firstName,
-      lastName: lastName
-    }
+    let filter: ISearchFilter = {}
+
+    if (deptName !== "") filter.departmentName = deptName;
+    if (firstName !== "") filter.firstName = firstName;
+    if (lastName !== "") filter.lastName = lastName;
 
     setSearchFilter(filter);
+
+    console.log("===SEARCHFILTER===")
+    console.log(searchFilter);
   }
 
   return (

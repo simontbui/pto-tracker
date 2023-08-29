@@ -44,7 +44,8 @@ export const getEventDetails = (req: Request, res: Response) => {
                 last_name: row.last_name,
                 reason: row.reason,
                 date_start: row.date_start,
-                date_end: row.date_end
+                date_end: row.date_end,
+                department_name: row.department_name
             });
         })
 

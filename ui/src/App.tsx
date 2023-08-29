@@ -15,11 +15,7 @@ const Wrapper = styled(Box)({
 });
 
 function App() {
-  const [searchFilter, setSearchFilter] = useState<ISearchFilter>({
-    departmentName: "",
-    firstName: "",
-    lastName: ""
-  });
+  const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
 
   return (
     <div className="parent-container">
@@ -39,6 +35,7 @@ function App() {
           <Box sx={{ top: "30%", position: "relative" }}>
             <SearchFilter 
               setSearchFilter={setSearchFilter}
+              searchFilter={searchFilter}
             />
           </Box>
         </Box>
