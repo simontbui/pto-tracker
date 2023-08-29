@@ -20,7 +20,7 @@ const modalStyle = {
 };
 
 interface IProps {
-  searchFilter: ISearchFilter
+  searchFilter: ISearchFilter | {}
 }
 
 export default function CalendarUI({searchFilter}: IProps) {
@@ -31,7 +31,7 @@ export default function CalendarUI({searchFilter}: IProps) {
   const localizer = momentLocalizer(moment);
 
   useEffect(() => {
-    EventDetails.getAllEvents
+    EventDetails.get(searchFilter)
       .then(res => {
         let data: any[] = [];
         res.forEach((row: any) => data.push({
@@ -45,7 +45,7 @@ export default function CalendarUI({searchFilter}: IProps) {
         setEventsDetails(data);
       })
       .catch(err => console.log(err))
-  },[])
+  },[searchFilter])
 
   function handleShowMore(e: any) {
     console.log(e);
@@ -57,10 +57,12 @@ export default function CalendarUI({searchFilter}: IProps) {
     console.log(e);
     setCurrEventDetails([e]);
     setModalOpen(true);
-
+    console.log("====EVENTDETAILS===")
+    console.log(eventDetails)
   }
   function handleCloseModal() {
     setModalOpen(false);
+    console.log("====SEARCH FILTER===")
     console.log(searchFilter);
   }
 

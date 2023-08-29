@@ -5,4 +5,5 @@ export interface IEventDetails {
     reason: string;
     date_start: Date;
     date_end: Date;
+    department_name: string;
 }
