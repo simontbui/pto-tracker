@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import AddEvent from './components/AddEvent/AddEvent';
 import { useState } from 'react';
 import ISearchFilter from './api/models/searchfilter.interface';
+import LoginPage from './components/Login';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -16,6 +17,11 @@ const Wrapper = styled(Box)({
 
 function App() {
   const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
+  
+
+  return (
+    <LoginPage />
+  )
 
   return (
     <div className="parent-container">
