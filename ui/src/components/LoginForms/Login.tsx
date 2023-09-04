@@ -1,25 +1,27 @@
-import { Copyright } from "@mui/icons-material";
 import { CssBaseline, Box, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, Grid, Link } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Paper from "@mui/material/Paper";
+import Background from "./Background";
 
-export default function LoginPage() {
+interface IProps {
+  navigateToSignUp: Function
+}
+
+export default function Login() {
+  function handleSubmit(e: any) {
+    e.preventDefault();
+
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+    console.log(email, password);
+  }
+
   return(
     <>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <Background />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -36,7 +38,7 @@ export default function LoginPage() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -76,9 +78,12 @@ export default function LoginPage() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2" >
                     {"Don't have an account? Sign Up"}
                   </Link>
+                  {/* <Button component={routerLink} to="/signup" >
+                    {"Don't have an account? Sign Up"}
+                  </Button> */}
                 </Grid>
               </Grid>
             </Box>
