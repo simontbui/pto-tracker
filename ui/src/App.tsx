@@ -1,3 +1,4 @@
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import { Box } from '@mui/material';
 import CalendarUI from './components/CalendarUI';
 import Header from './components/Header';
@@ -6,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import AddEvent from './components/AddEvent/AddEvent';
 import { useState } from 'react';
 import ISearchFilter from './api/models/searchfilter.interface';
-import LoginPage from './components/Login';
+import Login from './components/LoginForms/Login';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -18,9 +19,14 @@ const Wrapper = styled(Box)({
 function App() {
   const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
   
+  // const navigate = useNavigate();
+
+  // function navigateToSignUp() {
+  //   navigate('/signup');
+  // }
 
   return (
-    <LoginPage />
+    <Login />
   )
 
   return (
