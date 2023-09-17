@@ -2,20 +2,25 @@ import { CssBaseline, Box, Avatar, Typography, TextField, FormControlLabel, Chec
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Paper from "@mui/material/Paper";
 import Background from "./Background";
+import { LoginAuth } from "../../api/api";
 
 interface IProps {
-  navigateToSignUp: Function
+  handleLoginSubmit: ((e: React.FormEvent<HTMLFormElement>) => void)
 }
 
-export default function Login() {
-  function handleSubmit(e: any) {
-    e.preventDefault();
+export default function Login({ handleLoginSubmit }: IProps) {
+  // function handleSubmit(e: any) {
+  //   e.preventDefault();
 
-    const email = e.target.email.value
-    const password = e.target.password.value
+  //   const email = e.target.email.value
+  //   const password = e.target.password.value
 
-    console.log(email, password);
-  }
+  //   console.log(email, password);
+
+  //   LoginAuth(email, password)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // }
 
   return(
     <>
@@ -38,7 +43,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleLoginSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -81,9 +86,6 @@ export default function Login() {
                   <Link href="/signup" variant="body2" >
                     {"Don't have an account? Sign Up"}
                   </Link>
-                  {/* <Button component={routerLink} to="/signup" >
-                    {"Don't have an account? Sign Up"}
-                  </Button> */}
                 </Grid>
               </Grid>
             </Box>
