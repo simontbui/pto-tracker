@@ -29,11 +29,12 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         const employee: IEmployee = results.rows[0];
 
         let token;
+        const secret: string = process.env.SECRET as string;
 
         try {
             token = jsonwebtoken.sign(
                 { employee_id: employee.employee_id, email: employee.email }, 
-                process.env.SECRET,
+                secret,
                 { expiresIn: "1h" }
             );
         } catch (err) {
@@ -42,6 +43,8 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
             return res.status(500).json({ error });
         }
 
-        res.status(200).json({ token, employee });
+        res.cookie("access_token", token, { httpOnly: true })
+            .status(200)
+            .json({ employee })
     })
 }
