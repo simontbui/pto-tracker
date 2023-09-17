@@ -15,7 +15,8 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+// app.use(cors());
+app.use(cors({credentials: true, origin: "http://localhost:3000"}));
 app.use(express.json());
 app.use("/api", router)
 

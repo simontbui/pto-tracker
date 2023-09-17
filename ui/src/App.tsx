@@ -8,6 +8,7 @@ import AddEvent from './components/AddEvent/AddEvent';
 import { useState } from 'react';
 import ISearchFilter from './api/models/searchfilter.interface';
 import Login from './components/LoginForms/Login';
+import { LoginAuth } from './api/api';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -18,17 +19,30 @@ const Wrapper = styled(Box)({
 
 function App() {
   const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
-  
+  const [auth, setAuth] = useState<boolean>(false);
   // const navigate = useNavigate();
 
   // function navigateToSignUp() {
   //   navigate('/signup');
   // }
 
-  return (
-    <Login />
-  )
+  function handleLoginSubmit(e: any) {
+    e.preventDefault();
 
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+    console.log(email, password);
+
+    LoginAuth(email, password)
+      .then(res => setAuth(true))
+      .catch(err => console.log(err));
+  }
+
+  if (!auth) {
+    return <Login handleLoginSubmit={handleLoginSubmit}/>;
+  }
+  
   return (
     <div className="parent-container">
       <Header />

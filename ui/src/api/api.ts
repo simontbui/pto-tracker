@@ -16,11 +16,23 @@ const requests = {
             console.log(params);
         }
 
-        const response = await axios.get(url, { params: params });
+        const response = await axios.get(url, {
+            params: params,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return responseBody(response);
     },
     post: async (url: string, body: Object = {}): Promise<any> => {
-        const response = await axios.post(url, body);
+        const response = await axios.post(url, body, {
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:5044/',
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response);
         return responseBody(response);
     }
 }
