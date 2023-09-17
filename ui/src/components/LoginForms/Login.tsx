@@ -2,6 +2,7 @@ import { CssBaseline, Box, Avatar, Typography, TextField, FormControlLabel, Chec
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Paper from "@mui/material/Paper";
 import Background from "./Background";
+import { LoginAuth } from "../../api/api";
 
 interface IProps {
   navigateToSignUp: Function
@@ -15,6 +16,10 @@ export default function Login() {
     const password = e.target.password.value
 
     console.log(email, password);
+
+    LoginAuth(email, password)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 
   return(
@@ -81,9 +86,6 @@ export default function Login() {
                   <Link href="/signup" variant="body2" >
                     {"Don't have an account? Sign Up"}
                   </Link>
-                  {/* <Button component={routerLink} to="/signup" >
-                    {"Don't have an account? Sign Up"}
-                  </Button> */}
                 </Grid>
               </Grid>
             </Box>

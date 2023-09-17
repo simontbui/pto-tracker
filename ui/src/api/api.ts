@@ -8,7 +8,7 @@ const responseBody = (response: AxiosResponse) => response.data;
 //insert axios.interceptors.response.use here for error handling later
 
 const requests = {
-    get: (url: string, params: object) => {
+    get: async (url: string, params: object = {}) => {
         if (url !== "departments/") {
             console.log("===REQUESTS===")
             console.log(url);
@@ -16,7 +16,12 @@ const requests = {
             console.log(params);
         }
 
-        return axios.get(url, {params: params}).then(responseBody)
+        const response = await axios.get(url, { params: params });
+        return responseBody(response);
+    },
+    post: async (url: string, body: Object = {}): Promise<any> => {
+        const response = await axios.post(url, body);
+        return responseBody(response);
     }
 }
 
@@ -25,5 +30,13 @@ export const EventDetails = {
 }
 
 export const Departments = {
-    getAllDepartments: requests.get("departments/", {})
+    getAllDepartments: requests.get("departments/")
 }
+
+export const LoginAuth = (email: string, password: string) => {
+    return requests.post("login", { email, password })
+}
+
+// export const LoginAuth = {
+//     post: (email: string, password: string) => requests.post("login", { email, password })
+// }

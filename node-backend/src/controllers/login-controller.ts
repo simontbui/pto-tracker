@@ -5,8 +5,6 @@ import jsonwebtoken from "jsonwebtoken";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
-    //return res.status(200).json({ email, password })
-
 
     const query = `SELECT * FROM employees 
                    WHERE email='${email}' 
