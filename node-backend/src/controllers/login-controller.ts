@@ -5,6 +5,20 @@ import jsonwebtoken from "jsonwebtoken";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
+    const secret: string = process.env.SECRET as string;
+    let token = req.cookies?.access_token;
+ 
+    if (token) {
+        try {
+            const data = jsonwebtoken.verify(token, secret)
+            console.log("SUCCESSFULLY VERIFIED")
+            console.log(data)
+            return res.status(200).json({ authenticated: true })
+        } catch {
+            console.log("COULD NOT VERIFY")
+            return res.sendStatus(403);
+        }
+    }
 
     const query = `SELECT * FROM employees 
                    WHERE email='${email}' 
@@ -28,9 +42,6 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
 
         const employee: IEmployee = results.rows[0];
 
-        let token;
-        const secret: string = process.env.SECRET as string;
-
         try {
             token = jsonwebtoken.sign(
                 { employee_id: employee.employee_id, email: employee.email }, 
@@ -45,6 +56,6 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
 
         res.cookie("access_token", token, { httpOnly: true })
             .status(200)
-            .json({ employee })
+            .json({ authenticated: true, employee })
     })
 }

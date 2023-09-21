@@ -5,10 +5,10 @@ import Header from './components/Header';
 import SearchFilter from './components/SearchFilter';
 import { styled } from "@mui/material/styles";
 import AddEvent from './components/AddEvent/AddEvent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ISearchFilter from './api/models/searchfilter.interface';
 import Login from './components/LoginForms/Login';
-import { LoginAuth } from './api/api';
+import { LoginAuth, LogoutAuth } from './api/api';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -19,13 +19,17 @@ const Wrapper = styled(Box)({
 
 function App() {
   const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
-  const [auth, setAuth] = useState<boolean>(false);
-  // const navigate = useNavigate();
+  const [auth, setAuth] = useState<boolean|null>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // function navigateToSignUp() {
-  //   navigate('/signup');
-  // }
-
+  useEffect(() => {
+    setLoading(true);
+    LoginAuth()
+      .then(res => res.authenticated ? setAuth(true) : setAuth(false))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false));
+  }, [])
+  
   function handleLoginSubmit(e: any) {
     e.preventDefault();
 
@@ -39,13 +43,22 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  if (!auth) {
-    return <Login handleLoginSubmit={handleLoginSubmit}/>;
+  function handleLogoutClick() {
+    LogoutAuth()
+      .then(res => console.log(res.Response))
+      .catch(err => console.log(err))
+      .finally(() => setAuth(false))
   }
+
+  //stall page render until jwt authentication process is done 
+  //(prevents login screen from flickering)
+  if (loading === true) return <></>;
+
+  if (!auth) return <Login handleLoginSubmit={handleLoginSubmit}/>;
   
   return (
     <div className="parent-container">
-      <Header />
+      <Header handleLogoutClick={handleLogoutClick}/>
 
       <Wrapper>
         <Box sx={{ border: "1px solid #ccc", padding: "55px"  }}>

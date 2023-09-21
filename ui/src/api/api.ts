@@ -45,10 +45,10 @@ export const Departments = {
     getAllDepartments: requests.get("departments/")
 }
 
-export const LoginAuth = (email: string, password: string) => {
+export const LoginAuth = (email: string|null = null, password: string|null = null) => {
     return requests.post("login", { email, password })
 }
 
-// export const LoginAuth = {
-//     post: (email: string, password: string) => requests.post("login", { email, password })
-// }
+export const LogoutAuth = () => {
+    return requests.post("logout")
+}

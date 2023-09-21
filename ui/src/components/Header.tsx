@@ -14,9 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
-export default function Header() {
+interface IProps {
+  handleLogoutClick: (() => void)
+};
+
+export default function Header({ handleLogoutClick }: IProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -152,6 +156,10 @@ export default function Header() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+
+              <MenuItem onClick={handleLogoutClick}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
