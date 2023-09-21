@@ -9,19 +9,6 @@ interface IProps {
 }
 
 export default function Login({ handleLoginSubmit }: IProps) {
-  // function handleSubmit(e: any) {
-  //   e.preventDefault();
-
-  //   const email = e.target.email.value
-  //   const password = e.target.password.value
-
-  //   console.log(email, password);
-
-  //   LoginAuth(email, password)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-  // }
-
   return(
     <>
       <Grid container component="main" sx={{ height: "100vh" }}>
