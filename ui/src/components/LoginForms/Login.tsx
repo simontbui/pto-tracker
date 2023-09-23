@@ -2,13 +2,47 @@ import { CssBaseline, Box, Avatar, Typography, TextField, FormControlLabel, Chec
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Paper from "@mui/material/Paper";
 import Background from "./Background";
-import { LoginAuth } from "../../api/api";
+import { LoginAuth, VerifyAuth } from "../../api/api";
+import { useAppDispatch } from "../../store";
+import { setIsAuth } from "../../slices/loginSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface IProps {
-  handleLoginSubmit: ((e: React.FormEvent<HTMLFormElement>) => void)
-}
+export default function Login() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-export default function Login({ handleLoginSubmit }: IProps) {
+  useEffect(() => {
+    VerifyAuth()
+      .then(res => {
+        if (res.authenticated) {
+          dispatch(setIsAuth(true));
+          navigate("/");
+        } else {
+          dispatch(setIsAuth(false));
+        }
+      })
+      .catch(err => console.log(err))
+  }, [])
+  
+  function handleLoginSubmit(e: any) {
+    e.preventDefault();
+
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+    LoginAuth(email, password)
+      .then(res => {
+        if (res.authenticated) {
+          dispatch(setIsAuth(true));
+          navigate("/");
+        } else {
+          dispatch(setIsAuth(false));
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
   return(
     <>
       <Grid container component="main" sx={{ height: "100vh" }}>

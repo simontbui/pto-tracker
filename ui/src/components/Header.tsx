@@ -12,17 +12,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useAppDispatch } from '../store';
+import { setIsAuth } from '../slices/loginSlice';
+import { useNavigate } from 'react-router-dom';
+import { LogoutAuth } from '../api/api';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard'];
 
-interface IProps {
-  handleLogoutClick: (() => void)
-};
-
-export default function Header({ handleLogoutClick }: IProps) {
+export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +41,15 @@ export default function Header({ handleLogoutClick }: IProps) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  function handleLogoutClick() {
+    LogoutAuth()
+      .then((res) => {
+        dispatch(setIsAuth(false));
+        navigate("login");
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <AppBar position="relative">
@@ -152,7 +164,7 @@ export default function Header({ handleLogoutClick }: IProps) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

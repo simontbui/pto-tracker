@@ -1,4 +1,4 @@
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, redirect, Navigate} from 'react-router-dom';
 import { Box } from '@mui/material';
 import CalendarUI from './components/CalendarUI';
 import Header from './components/Header';
@@ -8,7 +8,9 @@ import AddEvent from './components/AddEvent/AddEvent';
 import { useEffect, useState } from 'react';
 import ISearchFilter from './api/models/searchfilter.interface';
 import Login from './components/LoginForms/Login';
-import { LoginAuth, LogoutAuth } from './api/api';
+import { VerifyAuth } from './api/api';
+import { useAppDispatch, useAppSelector } from './store';
+import { setIsAuth } from './slices/loginSlice';
 
 const Wrapper = styled(Box)({
   display: "grid",
@@ -18,47 +20,31 @@ const Wrapper = styled(Box)({
 });
 
 function App() {
+  const navigate = useNavigate();
   const [searchFilter, setSearchFilter] = useState<ISearchFilter|object>({});
-  const [auth, setAuth] = useState<boolean|null>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { isAuth } = useAppSelector(state => state.login);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    LoginAuth()
-      .then(res => res.authenticated ? setAuth(true) : setAuth(false))
+    VerifyAuth()
+      .then(res => {
+        if (res.authenticated) {
+          dispatch(setIsAuth(true));
+        } else {
+          dispatch(setIsAuth(false));
+          navigate("login");
+        }
+      })
       .catch(err => console.log(err))
-      .finally(() => setLoading(false));
   }, [])
-  
-  function handleLoginSubmit(e: any) {
-    e.preventDefault();
 
-    const email = e.target.email.value
-    const password = e.target.password.value
-
-    console.log(email, password);
-
-    LoginAuth(email, password)
-      .then(res => setAuth(true))
-      .catch(err => console.log(err));
+  if (!isAuth) {
+    return <></>
   }
 
-  function handleLogoutClick() {
-    LogoutAuth()
-      .then(res => console.log(res.Response))
-      .catch(err => console.log(err))
-      .finally(() => setAuth(false))
-  }
-
-  //stall page render until jwt authentication process is done 
-  //(prevents login screen from flickering)
-  if (loading === true) return <></>;
-
-  if (!auth) return <Login handleLoginSubmit={handleLoginSubmit}/>;
-  
   return (
     <div className="parent-container">
-      <Header handleLogoutClick={handleLogoutClick}/>
+      <Header />
 
       <Wrapper>
         <Box sx={{ border: "1px solid #ccc", padding: "55px"  }}>
