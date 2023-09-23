@@ -9,13 +9,6 @@ const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
     get: async (url: string, params: object = {}) => {
-        if (url !== "departments/") {
-            console.log("===REQUESTS===")
-            console.log(url);
-            console.log("===PARAMS===")
-            console.log(params);
-        }
-
         const response = await axios.get(url, {
             params: params,
             headers: {
@@ -52,3 +45,7 @@ export const LoginAuth = (email: string|null = null, password: string|null = nul
 export const LogoutAuth = () => {
     return requests.post("logout")
 }
+
+export const VerifyAuth = () => {
+    return requests.post("verify-auth")
+} 

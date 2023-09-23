@@ -6,20 +6,8 @@ import jsonwebtoken from "jsonwebtoken";
 export const login = (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
     const secret: string = process.env.SECRET as string;
-    let token = req.cookies?.access_token;
+    let token;
  
-    if (token) {
-        try {
-            const data = jsonwebtoken.verify(token, secret)
-            console.log("SUCCESSFULLY VERIFIED")
-            console.log(data)
-            return res.status(200).json({ authenticated: true })
-        } catch {
-            console.log("COULD NOT VERIFY")
-            return res.sendStatus(403);
-        }
-    }
-
     const query = `SELECT * FROM employees 
                    WHERE email='${email}' 
                    AND password='${password}';`;
