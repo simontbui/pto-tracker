@@ -33,6 +33,9 @@ export default function Login() {
 
     LoginAuth(email, password)
       .then(res => {
+        console.log("=====")
+        console.log(res);
+        console.log(res.authenticated)
         if (res.authenticated) {
           dispatch(setIsAuth(true));
           navigate("/");
