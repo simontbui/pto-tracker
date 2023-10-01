@@ -2,9 +2,21 @@ using Microsoft.EntityFrameworkCore;
 using dotnet_backend.Data;
 using Microsoft.Extensions.Configuration;
 
+var MyCorsPolicy = "_MyCorsPolicy";
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.Configure<Jwt>(AppSettings.GetSection("Jwt"));
 
-// Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyCorsPolicy,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
 
 builder.Services.AddControllers();
 //builder.Services.AddDbContext<PtoContext>(opt => 
@@ -16,8 +28,6 @@ builder.Services.AddDbContext<PtoTrackerContext>();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-builder.Services.AddCors();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,12 +37,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+//app.UseCors(x => x
+//    .AllowAnyOrigin()
+//    .AllowAnyMethod()
+//    .AllowAnyHeader());
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyCorsPolicy);
 
 app.UseAuthorization();
 
