@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8N9q+ecye4HWToLXpyTJICbzfyLRXl9vscyhbpL9A1tYZGgfI9+cwZXhqjssTlzTvlC2eSfwy/OpOGlC3P8E+g==",
+  "dgSpecHash": "OrAB0j/zdruesq4J1DsaXbPSqVQZNcKpLelYMUvXrjemT9uXTAtB6h0idJI86RihfwzXblKNzbX1ey95Q5L8Lw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Simon\\repos\\pto-tracker\\dotnet-backend\\dotnet-backend.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,10 @@
     "C:\\Users\\Simon\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.0\\microsoft.identitymodel.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.0\\microsoft.identitymodel.jsonwebtokens.7.0.0.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.0\\microsoft.identitymodel.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.0\\microsoft.identitymodel.tokens.7.0.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
@@ -32,6 +36,7 @@
     "C:\\Users\\Simon\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
+    "C:\\Users\\Simon\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.0\\system.identitymodel.tokens.jwt.7.0.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\Simon\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
