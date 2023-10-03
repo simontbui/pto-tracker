@@ -18,4 +18,5 @@ public partial class ViewEventDetail
     public DateOnly? date_end { get; set; }
 
     public int? department_id { get; set; }
+    public string? department_name { get; set; }
 }

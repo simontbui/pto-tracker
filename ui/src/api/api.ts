@@ -35,7 +35,7 @@ export const EventDetails = {
 }
 
 export const Departments = {
-    getAllDepartments: requests.get("departments/")
+    getAllDepartments: requests.get("departments")
 }
 
 export const LoginAuth = (email: string|null = null, password: string|null = null) => {
