@@ -47,3 +47,7 @@ C:\Users\Simon\repos\pto-tracker\dotnet-backend\obj\Debug\net7.0\refint\dotnet-b
 C:\Users\Simon\repos\pto-tracker\dotnet-backend\obj\Debug\net7.0\dotnet-backend.pdb
 C:\Users\Simon\repos\pto-tracker\dotnet-backend\obj\Debug\net7.0\dotnet-backend.genruntimeconfig.cache
 C:\Users\Simon\repos\pto-tracker\dotnet-backend\obj\Debug\net7.0\ref\dotnet-backend.dll
+C:\Users\Simon\repos\pto-tracker\dotnet-backend\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\Simon\repos\pto-tracker\dotnet-backend\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\Simon\repos\pto-tracker\dotnet-backend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Simon\repos\pto-tracker\dotnet-backend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

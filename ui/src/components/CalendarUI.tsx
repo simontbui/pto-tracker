@@ -42,6 +42,9 @@ export default function CalendarUI({searchFilter}: IProps) {
             date_start: moment(row.date_start, "YYYY-MM-DD"),
             date_end: moment(row.date_end, "YYYY-MM-DD").add(1, "d")
         }))
+
+        console.log("====SEARCH FILTER RESULTS====")
+        console.log(data);
         setEventsDetails(data);
       })
       .catch(err => console.log(err))

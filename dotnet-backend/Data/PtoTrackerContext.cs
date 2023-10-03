@@ -109,6 +109,7 @@ public partial class PtoTrackerContext : DbContext
             entity.Property(e => e.date_start).HasColumnName("date_start");
             entity.Property(e => e.department_id).HasColumnName("department_id");
             entity.Property(e => e.event_id).HasColumnName("event_id");
+            entity.Property(e => e.department_name).HasColumnName("department_name");
             entity.Property(e => e.first_name)
                 .HasMaxLength(15)
                 .HasColumnName("first_name");
